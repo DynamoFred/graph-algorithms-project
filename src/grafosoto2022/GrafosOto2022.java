@@ -39,7 +39,6 @@ public class GrafosOto2022 extends JFrame{
     private JInternalFrame resultado;
     private JTextArea area;
     private JScrollPane jsp;
-    private boolean t;
     //--------------------------------------------------------------------------
     GrafosOto2022(){
     setSize(825,775);
@@ -61,7 +60,7 @@ public class GrafosOto2022 extends JFrame{
         BorraArista=new JButton("Borrar Ultima Arista");
         nodos=new ArrayList<>();
         aristas=new ArrayList<>();
-        panel=new PintaGrafo(nodos,aristas,t=true);
+        panel=new PintaGrafo(nodos, aristas, true);
         d=new JLabel("Destino");
         o=new JLabel("Origen");
         etiPeso=new JLabel("Peso");
@@ -523,21 +522,12 @@ public class GrafosOto2022 extends JFrame{
                     JOptionPane.showMessageDialog(null, "Primero cree aristas");
                 }
                 if (!nodos.isEmpty()&&!aristas.isEmpty()) {
-                    int A[][] = null,C[][];
+                    int A[][], C[][];
                     panel.setCadena("");
-                    ArrayList<Matrices> matrices=new ArrayList<>();
-                    if (A!=null){
-                        A=new int[nodos.size()][nodos.size()];
-                        for (Aristas a:aristas){
-                            A[a.getOrigen()-1][a.getDestino()-1]=1;                           
-                        }
-                    }
-                    else{
-                        //A=null;
-                        A=new int[nodos.size()][nodos.size()];
-                        for (Aristas a:aristas){
-                            A[a.getOrigen()-1][a.getDestino()-1]=1;
-                        } 
+                    ArrayList<Matrices> matrices = new ArrayList<>();
+                    A = new int[nodos.size()][nodos.size()];
+                    for (Aristas a : aristas) {
+                        A[a.getOrigen() - 1][a.getDestino() - 1] = 1;
                     }
                     for (int i = 0; i < A.length; i++) {
                         for (int j = 0; j < A.length; j++) {

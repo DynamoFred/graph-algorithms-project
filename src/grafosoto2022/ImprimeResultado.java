@@ -8,7 +8,6 @@ public class ImprimeResultado extends JFrame{
     private PintaGrafo panel;
     private ArrayList<Nodo> nodos;
     private ArrayList<Aristas> aristas;
-    private boolean t;
     
     ImprimeResultado(ArrayList<Nodo> nodos,ArrayList<Aristas> aristas, String S){
         this.nodos=nodos;
@@ -19,7 +18,7 @@ public class ImprimeResultado extends JFrame{
         this.setLocationRelativeTo(null);//inicia programa en el centro de la pantalla
     }
     private void initComponents(){
-        panel=new PintaGrafo(nodos,aristas,t=false);
+        panel=new PintaGrafo(nodos, aristas, false);
         panel.setBounds(10, 10, 400, 400);
         panel.setBackground(Color.BLACK);
         add(panel);

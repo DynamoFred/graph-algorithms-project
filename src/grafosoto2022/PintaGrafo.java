@@ -26,7 +26,7 @@ public class PintaGrafo extends JPanel{
     private boolean dirigido;
     private String cadena="";
     //--------------------------------------------------------------------------
-    public PintaGrafo(ArrayList<Nodo> nodos,ArrayList<Aristas> aristas,boolean t){
+    public PintaGrafo(ArrayList<Nodo> nodos,ArrayList<Aristas> aristas, boolean t){
         setBackground(Color.DARK_GRAY);
         this.nodos=nodos;
         this.aristas=aristas;
@@ -48,7 +48,6 @@ public class PintaGrafo extends JPanel{
         });
         //************************************************************
         MouseAdapter ma=new MouseAdapter(){
-            boolean encima=false;
             boolean movimiento=false;
             @Override
             public void mouseClicked(MouseEvent e){//IMPRIME LOS NODOS EN PANEL CON CADA CLICK
@@ -65,7 +64,7 @@ public class PintaGrafo extends JPanel{
                 }
             }
             @Override
-           public void mouseDragged(MouseEvent e1){//para mover grafo
+            public void mouseDragged(MouseEvent e1){//para mover grafo
                 
                 if(movimiento){
                     nodos.get(auxNodo).setX(e1.getX());
@@ -75,15 +74,12 @@ public class PintaGrafo extends JPanel{
                 
             }
             @Override
-           public void mousePressed(MouseEvent e2){
-               if (find(e2.getPoint())!=null){//para mover grafo
+            public void mousePressed(MouseEvent e2){
+                if (find(e2.getPoint())!=null){//para mover grafo
                     movimiento=true;
                     auxNodo=find(e2.getPoint()).getDato()-1;
-               }
-           }
-           public void mouseRealeased(MouseEvent e3){//para mover grafo
-               movimiento=false;  
-           }
+                }
+            }
         };
         //************************************************************
         addMouseListener(ma);
@@ -166,28 +162,18 @@ public class PintaGrafo extends JPanel{
     }
     //--------------------------------------------------------------------------
     public int[][] CreaMatriz(){
-        int A[][]=null;
-        if (A!=null){
-            A=new int[nodos.size()][nodos.size()];
-            for (Aristas a:aristas){
-                A[a.getOrigen()-1][a.getDestino()-1]=a.getPeso();                           
-            }
-        }
-        else{
-            //A=null;
-            A=new int[nodos.size()][nodos.size()];
-            for (Aristas a:aristas){
-                A[a.getOrigen()-1][a.getDestino()-1]=a.getPeso();
-            } 
+        int A[][] = new int[nodos.size()][nodos.size()];
+        for (Aristas a : aristas) {
+            A[a.getOrigen() - 1][a.getDestino() - 1] = a.getPeso();
         }
         for (int i = 0; i < A.length; i++) {
             for (int j = 0; j < A.length; j++) {
-                if (A[i][j]==0) {
-                    A[i][j]=9999;//infinito
+                if (A[i][j] == 0) {
+                    A[i][j] = 9999; // infinito
                 }
-                if(i==j){
-                    A[i][j]=0;
-                }   
+                if (i == j) {
+                    A[i][j] = 0;
+                }
             }
         }
         return A;
@@ -232,19 +218,15 @@ public class PintaGrafo extends JPanel{
         archselect=selectarch.getSelectedFile();
         BufferedReader br = null;
         String Destino;
-        String Origen="";                
-        String peso="";
         String Dato;
-        String x="";
-        String y="";
         try {
             br=new BufferedReader(new FileReader(archselect));
             while (!"----------".equals(Dato = br.readLine())) {
                 Nodo n=new Nodo();
                 n.setDato(Integer.parseInt(Dato));
                 setConta(Integer.parseInt(Dato)+1);
-                n.setX(Integer.parseInt(x=br.readLine()));
-                n.setY(Integer.parseInt(y=br.readLine()));
+                n.setX(Integer.parseInt(br.readLine()));
+                n.setY(Integer.parseInt(br.readLine()));
                 n.setNode(new Ellipse2D.Double(
                 n.getX()+15,n.getY()+15,30,30));
                 nodos.add(n);
@@ -253,8 +235,8 @@ public class PintaGrafo extends JPanel{
             while ((Destino = br.readLine())!=null) {
                 Aristas a=new Aristas();
                 a.setDestino(Integer.parseInt(Destino));
-                a.setOrigen(Integer.parseInt(Origen=br.readLine()));
-                a.setPeso(Integer.parseInt(peso=br.readLine()));
+                a.setOrigen(Integer.parseInt(br.readLine()));
+                a.setPeso(Integer.parseInt(br.readLine()));
                 aristas.add(a);
                 repaint();     
             }
@@ -367,13 +349,14 @@ public class PintaGrafo extends JPanel{
         return recorrido;
     }
     //--------------------------------------------------------------------------
+//NO TERMINADO ALGORITMO DE NIVELES
     public ArrayList<Integer> Niveles(int v, ArrayList<Boolean> marca, Queue<Integer> C){
         ArrayList<Integer> recorrido= new ArrayList<>();
-        int x,y;
+        //int x,y;
         marca.set(v, true);
         C.add(v);
         while(!C.isEmpty()){
-            x=C.element();
+            //x=C.element();
             C.remove();
             for (int i = 0; i < 10; i++) {
                 
